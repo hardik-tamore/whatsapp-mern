@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Chats from "./Chats";
 import Sidebar from "./Sidebar";
@@ -7,7 +7,14 @@ import Login from "./Login";
 import { useStateValue } from "./StateProvider";
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
+  const [isMobile, setisMobile] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth < 480) {
+      setisMobile(true);
+    }
+  }, []);
 
   return (
     <div className="app">
@@ -16,12 +23,14 @@ function App() {
       ) : (
         <div className="app_body">
           <Router>
-            <Sidebar />
+            <Route path="/" exact>
+              <Sidebar />
+            </Route>
             <Switch>
               <Route path="/rooms/:roomId">
+                {!isMobile && <Sidebar />}
                 <Chats />
               </Route>
-              <Route path="/">{/* <Chats /> */}</Route>
             </Switch>
           </Router>
         </div>

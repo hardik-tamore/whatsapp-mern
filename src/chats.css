@@ -86,3 +86,23 @@
   color: gray;
   padding: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+  .chat {
+    flex: 1;
+  }
+  .chat__header {
+    padding: 0px;
+  }
+  .chat__headerRight {
+    flex: 0.2;
+  }
+  .chat__headerInfo > h3 {
+    margin-bottom: 3px;
+
+    font-weight: 500;
+  }
+  .chat__headerInfo > p {
+    color: gray;
+  }
+}

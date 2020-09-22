@@ -79,8 +79,15 @@
   border: none;
   outline: none;
 }
-.chat__footer > form > button {
-  display: none;
+
+.chat__footerButton {
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.chat__footerButton > .MuiSvgIcon-root {
+  color: rgb(21, 128, 216);
 }
 .chat__footer > .MuiSvgIcon-root {
   color: gray;
@@ -101,8 +108,5 @@
     margin-bottom: 3px;
 
     font-weight: 500;
-  }
-  .chat__headerInfo > p {
-    color: gray;
   }
 }

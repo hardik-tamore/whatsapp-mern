@@ -14,6 +14,7 @@ import userEvent from "@testing-library/user-event";
 import { useStateValue } from "./StateProvider";
 import firebase from "firebase";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import SendIcon from "@material-ui/icons/Send";
 
 function Chats() {
   const [seed, setSeed] = useState("");
@@ -44,11 +45,14 @@ function Chats() {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    db.collection("rooms").doc(roomId).collection("messages").add({
-      name: user.displayName,
-      message: input,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    if (input !== "") {
+      db.collection("rooms").doc(roomId).collection("messages").add({
+        name: user.displayName,
+        message: input,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+    }
+
     setInput("");
   };
 
@@ -68,7 +72,7 @@ function Chats() {
             ).toUTCString()}
           </p>
         </div>
-        <div className="chat__headerRight">
+        {/* <div className="chat__headerRight">
           <IconButton>
             <SearchOutlined />
           </IconButton>
@@ -78,7 +82,7 @@ function Chats() {
           <IconButton>
             <MoreVert />
           </IconButton>
-        </div>
+        </div> */}
       </div>
       <div className="chat__body">
         {messages.map((message) => {
@@ -106,11 +110,15 @@ function Chats() {
             placeholder="Type a message"
             value={input}
           />
-          <button onClick={sendMessage} type="submit">
-            Send a message
+          <button
+            className="chat__footerButton"
+            onClick={sendMessage}
+            type="submit"
+          >
+            <SendIcon />
           </button>
         </form>
-        <MicIcon />
+        {/* <MicIcon /> */}
       </div>
     </div>
   );
